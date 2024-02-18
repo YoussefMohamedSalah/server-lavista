@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllElectronicsItems, getAllLandScapeItems, getAllLocations, getAllMechanicsItems, getAllTechnicalValidityItems, getAllUsers, getAllVillages } from "../controller/LavsiatController";
+import { getAllItems, getAllLocations, getAllUsers, getAllVillages } from "../controller/LavistaController";
 
 
 const router = Router();
@@ -7,9 +7,6 @@ const router = Router();
 router.route("/users/").get(getAllUsers);
 router.route("/locations/").get(getAllLocations);
 router.route("/villages/").get(getAllVillages);
-router.route("/mechanics/").get(getAllMechanicsItems);
-router.route("/electronics/").get(getAllElectronicsItems);
-router.route("/technical_validity/").get(getAllTechnicalValidityItems);
-router.route("/land_scape/").get(getAllLandScapeItems);
+router.route("/items/").get(getAllItems);
 
 export { router as LavistaRouter };

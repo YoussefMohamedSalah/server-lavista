@@ -1,73 +1,34 @@
 import { getRepository } from "typeorm";
-import { Mechanics } from "../entities/sectionsTables/Mechanics";
-import { Electronics } from "../entities/sectionsTables/Electronics";
-import { LandScape } from "../entities/sectionsTables/LandScape";
-import { TechnicalValidity } from "../entities/sectionsTables/TechnicalValidity";
-
+import { Section } from "../entities/Section";
 // ok
-export const get_Section_Mechanics = async (id: string) => {
+
+export const get_Section_By_Id = async (id: string) => {
     try {
-        const mechanicsRepository = getRepository(Mechanics);
-        const mechanics = await mechanicsRepository
-            .createQueryBuilder("mechanics")
-            .where("mechanics.id = :id", { id: id })
-            .leftJoinAndSelect('mechanics.items', 'mechanics_item')
+        const sectionsRepository = getRepository(Section);
+        const sections = await sectionsRepository
+            .createQueryBuilder("section")
+            .where("section.id = :id", { id: id })
             .getOne();
-        return mechanics;
+        return sections;
     } catch (error) {
         // Handle the error
-        console.error("Error Getting Mechanics Items:", error);
+        console.error("Error Getting Section Items:", error);
         return;
     }
 };
 
-// ok
-export const get_Section_Electronics = async (id: string) => {
+export const get_Section_With_Items_By_Id = async (id: string) => {
     try {
-        const electronicsRepository = getRepository(Electronics);
-        const electronics = await electronicsRepository
-            .createQueryBuilder("electronics")
-            .where("electronics.id = :id", { id: id })
-            .leftJoinAndSelect('electronics.items', 'electronics_item')
+        const sectionsRepository = getRepository(Section);
+        const sections = await sectionsRepository
+            .createQueryBuilder("section")
+            .where("section.id = :id", { id: id })
+            .leftJoinAndSelect('section.items', 'item')
             .getOne();
-        return electronics;
+        return sections;
     } catch (error) {
         // Handle the error
-        console.error("Error Getting Electronics Items:", error);
-        return;
-    }
-};
-
-// ok
-export const get_Section_LandScape = async (id: string) => {
-    try {
-        const landScapeRepository = getRepository(LandScape);
-        const landScape = await landScapeRepository
-            .createQueryBuilder("land_scape")
-            .where("land_scape.id = :id", { id: id })
-            .leftJoinAndSelect('land_scape.items', 'land_scape_item')
-            .getOne();
-        return landScape;
-    } catch (error) {
-        // Handle the error
-        console.error("Error Getting LandScape Items:", error);
-        return;
-    }
-};
-
-// ok
-export const get_Section_TechValidity = async (id: string) => {
-    try {
-        const techValidityRepository = getRepository(TechnicalValidity);
-        const techValidity = await techValidityRepository
-            .createQueryBuilder("technical_validity")
-            .where("technical_validity.id = :id", { id: id })
-            .leftJoinAndSelect('technical_validity.items', 'technical_validity_item')
-            .getOne();
-        return techValidity;
-    } catch (error) {
-        // Handle the error
-        console.error("Error Getting Technical Validity Items:", error);
+        console.error("Error Getting Section Items:", error);
         return;
     }
 };

@@ -1,10 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, ManyToMany, JoinTable, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, OneToMany } from 'typeorm';
 import { Location } from './Location';
 import { Lavista } from './Lavista';
-import { Mechanics } from './sectionsTables/Mechanics';
-import { Electronics } from './sectionsTables/Electronics';
-import { LandScape } from './sectionsTables/LandScape';
-import { TechnicalValidity } from './sectionsTables/TechnicalValidity';
+import { Section } from './Section';
+import { Item } from './Item';
 
 @Entity({ name: 'village' })
 export class Village extends BaseEntity {
@@ -24,27 +22,17 @@ export class Village extends BaseEntity {
 
     // Relations
     // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
-    @OneToOne(() => Mechanics, mechanics => mechanics.village, { onDelete: 'CASCADE' })
-    @JoinColumn()
-    mechanics_section: Mechanics;
-
-    @OneToOne(() => Electronics, electronics => electronics.village, { onDelete: 'CASCADE' })
-    @JoinColumn()
-    electronics_section: Electronics;
-
-    @OneToOne(() => LandScape, landScape => landScape.village, { onDelete: 'CASCADE' })
-    @JoinColumn()
-    landScape_section: LandScape;
-
-    @OneToOne(() => TechnicalValidity, technicalValidity => technicalValidity.village, { onDelete: 'CASCADE' })
-    @JoinColumn()
-    technicalValidity_section: TechnicalValidity;
+    @ManyToOne(() => Lavista, lavista => lavista.villages, { onDelete: 'CASCADE' })
+    lavista: Lavista;
 
     @ManyToOne(() => Location, location => location.villages)
     location: Location;
 
-    @ManyToOne(() => Lavista, lavista => lavista.villages, { onDelete: 'CASCADE' })
-    lavista: Lavista;
+    @OneToMany(() => Section, section => section.village, { cascade: true, onDelete: 'CASCADE' })
+    sections: Section[];
+
+    @OneToMany(() => Item, item => item.village, { cascade: true, onDelete: 'CASCADE' })
+    items: Item[];
     // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
 
     @Column({
