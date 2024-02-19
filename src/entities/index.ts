@@ -6,12 +6,4 @@ import { Section } from "./Section";
 import { User } from "./User";
 import { Village } from "./Village";
 
-export const entities = [
-    Lavista,
-    User,
-    Location,
-    Village,
-    Section,
-    Item,
-    ItemType
-];
+export const entities = [Lavista, User, Location, Village, Section, Item, ItemType];

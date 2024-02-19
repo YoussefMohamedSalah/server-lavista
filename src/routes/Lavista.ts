@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { getAllItems, getAllLocations, getAllUsers, getAllVillages } from "../controller/LavistaController";
-
+import { getLavista, getLavistaItems, getLavistaLocations, getLavistaSections, getLavistaUsers, getLavistaVillages } from "../controller/LavistaController";
 
 const router = Router();
 
-router.route("/users/").get(getAllUsers);
-router.route("/locations/").get(getAllLocations);
-router.route("/villages/").get(getAllVillages);
-router.route("/items/").get(getAllItems);
+router.route("/").get(getLavista);
+router.route("/users/").get(getLavistaUsers);
+router.route("/locations/").get(getLavistaLocations);
+router.route("/villages/").get(getLavistaVillages);
+router.route("/sections/").get(getLavistaSections);
+router.route("/items/").get(getLavistaItems);
 
 export { router as LavistaRouter };

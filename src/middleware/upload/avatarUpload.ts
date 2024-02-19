@@ -1,16 +1,16 @@
-import multer from 'multer';
-import { UploadPath } from '../../enums/uploadPath';
+import multer from "multer";
+import { UploadPath } from "../../enums/uploadPath";
 
-require('dotenv').config();
+require("dotenv").config();
 
 // Multer configuration
 const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, UploadPath.AVATAR); // Set the destination folder where files will be saved
-	},
-	filename: (req, file, cb) => {
-		cb(null, Date.now() + '-' + file.originalname); // Set the filename to be unique
-	},
+  destination: (req, file, cb) => {
+    cb(null, UploadPath.AVATAR); // Set the destination folder where files will be saved
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname); // Set the filename to be unique
+  },
 });
 
 const uploadAvatar = multer({ storage });

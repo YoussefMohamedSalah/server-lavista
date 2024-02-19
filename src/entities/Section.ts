@@ -1,46 +1,47 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany, ManyToOne } from 'typeorm';
-import { Village } from './Village';
-import { Lavista } from './Lavista';
-import { Item } from './Item';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany, ManyToOne } from "typeorm";
+import { Village } from "./Village";
+import { Lavista } from "./Lavista";
+import { Location } from "./Location";
+import { Item } from "./Item";
 
-@Entity({ name: 'section' })
+@Entity({ name: "section" })
 export class Section extends BaseEntity {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column({
-        nullable: false,
-        default: ''
-    })
-    name: string;
+  @Column({
+    nullable: false,
+    default: "",
+  })
+  name: string;
 
-    @Column({ default: 0 })
-    villages_count: number;
+  @Column({ default: 0 })
+  items_count: number;
 
-    // Relations
-    // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
-    @ManyToOne(() => Lavista, lavista => lavista.sections, { onDelete: 'CASCADE' })
-    lavista: Lavista;
+  // Relations
+  // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
+  @ManyToOne(() => Lavista, (lavista) => lavista.sections, { onDelete: "CASCADE" })
+  lavista: Lavista;
 
-    @ManyToOne(() => Section, section => section.location, { onDelete: 'CASCADE' })
-    location: Section;
+  @ManyToOne(() => Location, (location) => location.sections, { onDelete: "CASCADE" })
+  location: Location;
 
-    @OneToMany(() => Village, village => village.sections)
-    village: Village[];
+  @ManyToOne(() => Village, (village) => village.sections, { onDelete: "CASCADE" })
+  village: Village;
 
-    @OneToMany(() => Item, item => item.section, { cascade: true, onDelete: 'CASCADE' })
-    items: Item[];
-    // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
+  @OneToMany(() => Item, (item) => item.section, { cascade: true, onDelete: "CASCADE" })
+  items: Item[];
+  // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
 
-    @Column({
-        type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP'
-    })
-    createdAt: Date;
+  @Column({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
+  })
+  createdAt: Date;
 
-    @Column({
-        type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP'
-    })
-    updatedAt: Date;
+  @Column({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
+  })
+  updatedAt: Date;
 }

@@ -3,7 +3,6 @@ import { createItem, deleteItem, getItemById, updateItem } from "../controller/I
 
 const router = Router();
 
-router.route("/").post(createItem);
-router.route("/:id").get(getItemById).put(updateItem).delete(deleteItem);
+router.route("/:id").post(createItem).get(getItemById).put(updateItem).delete(deleteItem);
 
-export { router as LocationRouter };
+export { router as ItemRouter };

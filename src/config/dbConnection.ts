@@ -1,7 +1,7 @@
-import { createConnection } from 'typeorm';
-import { entities } from '../entities';
+import { createConnection } from "typeorm";
+import { entities } from "../entities";
 
-require('dotenv').config();
+require("dotenv").config();
 
 export const connectToDataBase = async () => {
   const user = process.env.DATABASE_USER;
@@ -12,9 +12,7 @@ export const connectToDataBase = async () => {
   const dbType = process.env.DATABASE_TYPE;
   const dbUrl = process.env.DATABASE_URL;
 
-
-
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     try {
       await createConnection({
         type: dbType as any,
@@ -29,7 +27,7 @@ export const connectToDataBase = async () => {
       console.log(`You Are Now Connected to Database At Port: ${port}`);
     } catch (error) {
       console.log(error);
-      console.log('Unable To Connect To Database');
+      console.log("Unable To Connect To Database");
       process.exit(1);
     }
   } else {
@@ -44,7 +42,7 @@ export const connectToDataBase = async () => {
       console.log(`You Are Now Connected to Database At Port: ${port}`);
     } catch (error) {
       console.log(error);
-      console.log('Unable To Connect To Database');
+      console.log("Unable To Connect To Database");
       process.exit(1);
     }
   }

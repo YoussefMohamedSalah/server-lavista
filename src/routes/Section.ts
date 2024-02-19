@@ -1,7 +1,11 @@
 import { Router } from "express";
-import { getSection } from "../controller/SectionController";
+import { createSection, deleteSection, getSectionById, updateSection } from "../controller/SectionController";
+import { getItemsBySectionId } from "../controller/ItemsController";
 
 const router = Router();
 
-router.route("/items/:id").get(getSection)
+router.route("/").post(createSection);
+router.route("/items/:id").get(getItemsBySectionId);
+router.route("/:id").get(getSectionById).put(updateSection).delete(deleteSection);
+
 export { router as SectionRouter };
