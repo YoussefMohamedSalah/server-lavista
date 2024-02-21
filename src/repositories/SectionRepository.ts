@@ -1,7 +1,6 @@
 import { getRepository } from "typeorm";
 import { Section } from "../entities/Section";
 
-
 export const get_Section_By_Id = async (id: string) => {
   try {
     const sectionsRepository = getRepository(Section);

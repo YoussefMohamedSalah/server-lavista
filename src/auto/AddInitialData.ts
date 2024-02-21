@@ -20,7 +20,6 @@ export const addInitialData = async () => {
       lavista.name = "Lavista";
       await lavistaRepository.save(lavista);
 
-
       let dataArr = ["Motor", "Filter", "Elec Panel", "Pool"];
       for (let i = 0; i < dataArr.length; i++) {
         const type = dataArr[i];

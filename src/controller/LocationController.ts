@@ -5,7 +5,6 @@ import { Location } from "../entities/Location";
 import { get_Lavista } from "../repositories/LavistaRepository";
 import { get_Location_By_Id } from "../repositories/LocationRepository";
 
-
 export const createLocation = async (req: Request, res: Response) => {
   const { name } = req.body;
   try {

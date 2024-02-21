@@ -1,7 +1,6 @@
 import { getRepository } from "typeorm";
 import { Lavista } from "../entities/Lavista";
 
-
 export const create_Lavista = async () => {
   try {
     const lavistaRepository = getRepository(Lavista);
@@ -86,7 +85,6 @@ export const get_Lavista_Sections = async () => {
       .getOne();
     return lavista;
   } catch (error) {
-
     console.error("Error Getting Lavista Sections:", error);
     return;
   }

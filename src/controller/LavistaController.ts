@@ -1,6 +1,13 @@
 import { Request, Response } from "express";
-import { get_Lavista, get_Lavista_Item_Types, get_Lavista_Items, get_Lavista_Locations, get_Lavista_Sections, get_Lavista_Users, get_Lavista_Villages } from "../repositories/LavistaRepository";
-
+import {
+  get_Lavista,
+  get_Lavista_Item_Types,
+  get_Lavista_Items,
+  get_Lavista_Locations,
+  get_Lavista_Sections,
+  get_Lavista_Users,
+  get_Lavista_Villages,
+} from "../repositories/LavistaRepository";
 
 export const getLavista = async (req: Request, res: Response) => {
   try {

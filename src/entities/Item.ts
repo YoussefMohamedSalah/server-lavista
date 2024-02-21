@@ -1,16 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  BaseEntity,
-  ManyToOne,
-  BeforeInsert,
-  getRepository,
-  OneToOne,
-  JoinColumn,
-  ManyToMany,
-  JoinTable,
-} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, BeforeInsert, getRepository } from "typeorm";
 import { Lavista } from "./Lavista";
 import { Location } from "./Location";
 import { Section } from "./Section";
@@ -28,11 +16,11 @@ export class Item extends BaseEntity {
   @Column({ nullable: true })
   serial_num: string;
 
-  @Column({ nullable: true })
-  brand: string;
-
   @Column({ nullable: false })
   name: string;
+
+  @Column({ nullable: true })
+  brand: string;
 
   @Column({ nullable: false, default: 0 })
   count: number;
@@ -57,6 +45,30 @@ export class Item extends BaseEntity {
 
   @Column({ nullable: true })
   q: string;
+
+  @Column({ nullable: true })
+  h: string;
+
+  @Column({ nullable: true })
+  mechanical_seal: string;
+
+  @Column({ nullable: true })
+  area: string;
+
+  @Column({ nullable: true })
+  sand: string;
+
+  @Column({ nullable: true })
+  sand_size: string;
+
+  @Column({ nullable: true })
+  max_pressure: string;
+
+
+
+
+  @Column({ nullable: true })
+  o_ring: string;
 
   @Column({ nullable: true })
   pump_type: string;

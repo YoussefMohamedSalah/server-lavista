@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { isValidUUID } from "../utils/validateUUID";
 import { getRepository } from "typeorm";
-import { get_Village_By_Id, get_Village_Data_By_Id, get_Villages_By_Location_Id } from "../repositories/VillageRepository";
+import {
+  get_Village_By_Id,
+  get_Village_Data_By_Id,
+  get_Villages_By_Location_Id,
+} from "../repositories/VillageRepository";
 import { get_Location_By_Id } from "../repositories/LocationRepository";
 import { Village } from "../entities/Village";
 import { get_Lavista } from "../repositories/LavistaRepository";
-
 
 export const createVillage = async (req: Request, res: Response) => {
   const { id } = req.params!; // location id

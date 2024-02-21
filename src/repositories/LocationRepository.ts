@@ -7,7 +7,7 @@ export const get_Location_By_Id = async (id: string) => {
     const location = await locationRepository
       .createQueryBuilder("location")
       .where("location.id = :id", { id: id })
-      .leftJoinAndSelect("location.villages","village")
+      .leftJoinAndSelect("location.villages", "village")
       .getOne();
     return location;
   } catch (error) {

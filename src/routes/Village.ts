@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { createVillage, getVillageById, deleteVillage, updateVillage, getVillageDataById } from "../controller/VillageController";
+import {
+  createVillage,
+  getVillageById,
+  deleteVillage,
+  updateVillage,
+  getVillageDataById,
+} from "../controller/VillageController";
 import { getSectionsByVillageId } from "../controller/SectionController";
 
 const router = Router();

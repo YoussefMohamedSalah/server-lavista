@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { isValidUUID } from "../utils/validateUUID";
-import { get_Section_By_Id, get_Sections_By_Location_Id, get_Sections_By_Village_Id } from "../repositories/SectionRepository";
+import {
+  get_Section_By_Id,
+  get_Sections_By_Location_Id,
+  get_Sections_By_Village_Id,
+} from "../repositories/SectionRepository";
 import { get_Lavista } from "../repositories/LavistaRepository";
 import { Section } from "../entities/Section";
 import { get_Village_By_Id } from "../repositories/VillageRepository";
 import { getRepository } from "typeorm";
-
 
 export const createSection = async (req: Request, res: Response) => {
   const { id } = req.params!; // village id
