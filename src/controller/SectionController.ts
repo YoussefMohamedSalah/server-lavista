@@ -23,9 +23,11 @@ export const createSection = async (req: Request, res: Response) => {
     const section = new Section();
     section.name = name;
     section.lavista = lavista;
+    section.village = village;
     section.location = village.location;
     await sectionRepository.save(section);
 
+    village.sections_count = village.sections_count + 1;
     village.sections = [...village.sections, section];
     await village.save();
     return res.status(200).json(village);

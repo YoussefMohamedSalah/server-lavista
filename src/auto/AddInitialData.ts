@@ -4,6 +4,7 @@ import { getRepository } from "typeorm";
 import { User } from "../entities/User";
 import bcrypt from "bcrypt";
 import { getByEmail } from "../repositories/UserRepository";
+import { ItemType } from "../entities/ItemType";
 
 const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -18,6 +19,18 @@ export const addInitialData = async () => {
       const lavista = new Lavista();
       lavista.name = "Lavista";
       await lavistaRepository.save(lavista);
+
+
+      let dataArr = ["Motor", "Filter", "Elec Panel", "Pool"];
+      for (let i = 0; i < dataArr.length; i++) {
+        const type = dataArr[i];
+
+        const itemTypeRepository = getRepository(ItemType);
+        const itemType = new ItemType();
+        itemType.name = type;
+        itemType.lavista = lavista;
+        await itemTypeRepository.save(itemType);
+      }
       existingLavista = lavista;
     }
 

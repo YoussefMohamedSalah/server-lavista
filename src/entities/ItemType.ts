@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, OneToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, OneToOne, ManyToMany, OneToMany } from "typeorm";
 import { Lavista } from "./Lavista";
 import { Item } from "./Item";
 
@@ -15,8 +15,8 @@ export class ItemType extends BaseEntity {
   @ManyToOne(() => Lavista, (lavista) => lavista.item_types, { onDelete: "CASCADE" })
   lavista: Lavista;
 
-  @OneToOne(() => Item, (item) => item.item_type, { onDelete: "CASCADE" })
-  item: Item;
+  @OneToMany(() => Item, (item) => item.item_type, { onDelete: "CASCADE" })
+  items: Item[];
   // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
   @Column({
     type: "timestamp",

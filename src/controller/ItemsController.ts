@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { get_Item_By_Id, get_Items_By_Location_Id, get_Items_By_Section_Id, get_Items_By_Village_Id } from "../repositories/ItemsRepository";
+import { get_Item_By_Id, get_Items_By_Location_Id, get_Items_By_Section_Id, get_Items_By_Section_Id_And_Type_Id, get_Items_By_Type_Id, get_Items_By_Village_Id } from "../repositories/ItemsRepository";
 import { isValidUUID } from "../utils/validateUUID";
 import { getRepository } from "typeorm";
 import { Item } from "../entities/Item";
@@ -125,6 +125,26 @@ export const getItemsBySectionId = async (req: Request, res: Response) => {
     const items = await get_Items_By_Section_Id(id);
     if (!items) return res.status(404).json({ msg: "Items not found" });
     return res.status(200).json(items);
+  } catch (error) {
+    console.error("Error Retrieving Items:", error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+};
+
+export const getItemsBySectionIdAndTypeId = async (req: Request, res: Response) => {
+  const { secId, typeId } = req.params!;
+  let isTypeValid = isValidUUID(typeId);
+  if (!isTypeValid) return res.status(400).json({ msg: "id is not valid" });
+  try {
+    if (secId === "0") {
+      const items = await get_Items_By_Type_Id(typeId);
+      if (!items) return res.status(404).json({ msg: "Items not found" });
+      return res.status(200).json(items);
+    } else {
+      const items = await get_Items_By_Section_Id_And_Type_Id(secId, typeId);
+      if (!items) return res.status(404).json({ msg: "Items not found" });
+      return res.status(200).json(items);
+    }
   } catch (error) {
     console.error("Error Retrieving Items:", error);
     return res.status(500).json({ msg: "Internal server error" });

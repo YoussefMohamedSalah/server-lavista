@@ -18,6 +18,11 @@ export class Village extends BaseEntity {
   @Column({
     default: 0,
   })
+  sections_count: number;
+
+  @Column({
+    default: 0,
+  })
   items_count: number;
 
   // Relations

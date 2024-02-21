@@ -8,6 +8,8 @@ import {
   getRepository,
   OneToOne,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Lavista } from "./Lavista";
 import { Location } from "./Location";
@@ -23,17 +25,56 @@ export class Item extends BaseEntity {
   @Column({ unique: true, nullable: true })
   code: string;
 
+  @Column({ nullable: true })
+  serial_num: string;
+
+  @Column({ nullable: true })
+  brand: string;
+
   @Column({ nullable: false })
   name: string;
 
   @Column({ nullable: false, default: 0 })
   count: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
+  hp: string;
+
+  @Column({ nullable: true })
+  amp: string;
+
+  @Column({ nullable: true })
+  phase: string;
+
+  @Column({ nullable: true })
+  capacitor: string;
+
+  @Column({ nullable: true })
+  front_bearing: string;
+
+  @Column({ nullable: true })
+  back_bearing: string;
+
+  @Column({ nullable: true })
+  q: string;
+
+  @Column({ nullable: true })
+  pump_type: string;
+
+  @Column({ nullable: true })
   details: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   state: string;
+
+  @Column({ nullable: true })
+  filter_type: string;
+
+  @Column({ nullable: true })
+  filter_diameter: string;
+
+  @Column({ nullable: true })
+  filter_flow: string;
 
   @Column({ nullable: false, default: "" })
   notes: string;
@@ -52,8 +93,7 @@ export class Item extends BaseEntity {
   @ManyToOne(() => Section, (section) => section.items, { onDelete: "CASCADE" })
   section: Section;
 
-  @OneToOne(() => ItemType, (item_type) => item_type.item, { onDelete: "CASCADE" })
-  @JoinColumn()
+  @ManyToOne(() => ItemType, (item_type) => item_type.items, { onDelete: "CASCADE" })
   item_type: ItemType;
   // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
   @Column({
