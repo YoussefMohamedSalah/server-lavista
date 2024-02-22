@@ -32,7 +32,7 @@ app.use(
 connectToDataBase();
 addInitialData();
 
-app.get("/api/download/file/:filename", (req, res) => {
+app.get("/lav/api/download/file/:filename", (req, res) => {
   const { filename } = req.params!;
   // Set the desired filename and file path
   const filePath = path.join(__dirname, "../uploads/file/", filename);
@@ -44,15 +44,15 @@ app.get("/api/download/file/:filename", (req, res) => {
   res.sendFile(filePath);
 });
 
-app.use("/api/auth", AuthRouter);
-app.use("/api/lavista", LavistaRouter);
-app.use("/api/location", LocationRouter);
-app.use("/api/village", VillageRouter);
-app.use("/api/section", SectionRouter);
-app.use("/api/item", ItemRouter);
+app.use("/lav/api/auth", AuthRouter);
+app.use("/lav/api/lavista", LavistaRouter);
+app.use("/lav/api/location", LocationRouter);
+app.use("/lav/api/village", VillageRouter);
+app.use("/lav/api/section", SectionRouter);
+app.use("/lav/api/item", ItemRouter);
 
 // ************************************************
 app.use(express.static("uploads"));
-app.use("/api/uploads", express.static("uploads"));
+app.use("/lav/api/uploads", express.static("uploads"));
 
 export default app;
