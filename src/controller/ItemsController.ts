@@ -231,20 +231,22 @@ export const getItemsBySectionId = async (req: Request, res: Response) => {
 };
 
 export const getItemsBySectionIdAndTypeId = async (req: Request, res: Response) => {
-  const { secId, typeId } = req.params!;
-  let isTypeValid = isValidUUID(typeId);
-  if (!isTypeValid) return res.status(400).json({ msg: "id is not valid" });
+  const { villageId } = req.params!;
+  const { sectionId, itemTypeId } = req.body!;
+  console.log({ villageId }, { sectionId }, { itemTypeId })
+  // let isTypeValid = isValidUUID(itemTypeId);
+  // if (!isTypeValid) return res.status(400).json({ msg: "id is not valid" });
   try {
-    if (secId === "0") {
-      console.log(secId)
-      const itemType = await get_Items_By_Type_Id(typeId);
-      if (!itemType) return res.status(404).json({ msg: "Item type not found" });
-      return res.status(200).json(itemType);
+    if (sectionId === "0") {
+      const items = await get_Items_By_Type_Id(villageId, itemTypeId);
+      if (!items) return res.status(404).json({ msg: "Item type not found" });
+      return res.status(200).json(items);
     } else {
-      const items = await get_Items_By_Section_Id_And_Type_Id(secId, typeId);
+      const items = await get_Items_By_Section_Id_And_Type_Id(sectionId, itemTypeId);
       if (!items) return res.status(404).json({ msg: "Items not found" });
       return res.status(200).json(items);
     }
+    // return res.status(200).json([]);
   } catch (error) {
     console.error("Error Retrieving Items:", error);
     return res.status(500).json({ msg: "Internal server error" });

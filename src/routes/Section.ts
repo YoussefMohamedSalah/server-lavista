@@ -5,8 +5,8 @@ import { getItemsBySectionId, getItemsBySectionIdAndTypeId } from "../controller
 const router = Router();
 
 router.route("/:id").post(createSection);
+router.route("/items/:villageId").post(getItemsBySectionIdAndTypeId);
 router.route("/items/:id").get(getItemsBySectionId);
-router.route("/items/:secId/type/:typeId").get(getItemsBySectionIdAndTypeId);
 router.route("/:id").get(getSectionById).put(updateSection).delete(deleteSection);
 
 export { router as SectionRouter };

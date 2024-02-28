@@ -81,14 +81,14 @@ export const get_Items_By_Section_Id_And_Type_Id = async (sectionId: string, ite
   }
 };
 
-export const get_Items_By_Type_Id = async (itemTypeId: string) => {
+export const get_Items_By_Type_Id = async (villageId: string, itemTypeId: string) => {
   try {
-    const itemRepository = getRepository(ItemType);
+    const itemRepository = getRepository(Item);
     const item = await itemRepository
-      .createQueryBuilder("item_type")
-      .where("item_type.id = :itemTypeId", { itemTypeId: itemTypeId })
-      .leftJoinAndSelect("item_type.items", "item")
-      .getOne();
+      .createQueryBuilder("item")
+      .where("item.item_type = :itemTypeId", { itemTypeId: itemTypeId })
+      .andWhere("item.village = :villageId", { villageId: villageId })
+      .getMany();
     return item;
   } catch (error) {
     console.error("Error Getting Items:", error);
