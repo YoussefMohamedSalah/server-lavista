@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { Item } from "../entities/Item";
+import { ItemType } from "../entities/ItemType";
 
 export const get_Item_By_Id = async (id: string) => {
   try {
@@ -82,11 +83,12 @@ export const get_Items_By_Section_Id_And_Type_Id = async (sectionId: string, ite
 
 export const get_Items_By_Type_Id = async (itemTypeId: string) => {
   try {
-    const itemRepository = getRepository(Item);
+    const itemRepository = getRepository(ItemType);
     const item = await itemRepository
-      .createQueryBuilder("item")
-      .where("item.item_type = :itemTypeId", { itemTypeId: itemTypeId })
-      .getMany();
+      .createQueryBuilder("item_type")
+      .where("item_type.id = :itemTypeId", { itemTypeId: itemTypeId })
+      .leftJoinAndSelect("item_type.items", "item")
+      .getOne();
     return item;
   } catch (error) {
     console.error("Error Getting Items:", error);
