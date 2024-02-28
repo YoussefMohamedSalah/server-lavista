@@ -239,7 +239,7 @@ export const getItemsBySectionIdAndTypeId = async (req: Request, res: Response) 
       console.log(secId)
       const itemType = await get_Items_By_Type_Id(typeId);
       if (!itemType) return res.status(404).json({ msg: "Item type not found" });
-      return res.status(200).json(itemType.items);
+      return res.status(200).json(itemType);
     } else {
       const items = await get_Items_By_Section_Id_And_Type_Id(secId, typeId);
       if (!items) return res.status(404).json({ msg: "Items not found" });
