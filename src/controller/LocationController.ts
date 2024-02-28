@@ -30,6 +30,7 @@ export const updateLocation = async (req: Request, res: Response) => {
     const location = await get_Location_By_Id(id);
     if (!location) return res.status(404).json({ msg: "Location not found" });
     const { name } = req.body;
+    console.log(name)
     location.name = name ? name : location.name;
     await location.save();
     return res.status(200).json(location);

@@ -42,6 +42,9 @@ export const createItem = async (req: Request, res: Response) => {
     filter_flow,
     notes,
   } = req.body;
+
+  console.log(req.body)
+
   let isValid = isValidUUID(id);
   if (!isValid) return res.status(400).json({ msg: "id is not valid" });
   try {
