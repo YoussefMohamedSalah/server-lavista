@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(morgan("dev"));
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-const corsOriginList = ["http://localhost:3001"];
+const corsOriginList = ["http://localhost:3001", "https://lavista.cp-portal.com", "https://www.lavista.cp-portal.com"]
 
 app.use(
   cors({
