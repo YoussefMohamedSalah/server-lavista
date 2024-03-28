@@ -1,3 +1,3 @@
 export enum UploadPath {
-  FILE = "uploads\\",
+  FILE = "uploads//",
 }

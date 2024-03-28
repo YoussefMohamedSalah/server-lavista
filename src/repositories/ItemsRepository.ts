@@ -88,6 +88,7 @@ export const get_Images_By_Section_Id = async (id: string) => {
     const section = await sectionRepository
       .createQueryBuilder("section")
       .where("section.id = :id", { id: id })
+      .leftJoinAndSelect("section.images", "image")
       .getOne();
     return section?.images;
   } catch (error) {

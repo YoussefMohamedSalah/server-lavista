@@ -246,12 +246,13 @@ export const getItemsBySectionIdAndTypeId = async (req: Request, res: Response) 
         const items = await get_Items_By_Type_Id(villageId, itemTypeId);
         if (!items) return res.status(404).json({ msg: "Item type not found" });
         return res.status(200).json(items);
-      } else {
-        // ## Images
-        const images = await get_Images_By_Section_Id(villageId);
-        if (!images) return res.status(404).json({ msg: "Images type not found" });
-        return res.status(200).json(images);
-      }
+      } else return res.status(404)
+      //  else {
+      //   // ## Images
+      //   const images = await get_Images_By_Section_Id(sectionId);
+      //   if (!images) return res.status(404).json({ msg: "Images type not found" });
+      //   return res.status(200).json(images);
+      // }
     } else {
       if (itemTypeId !== "images") {
         const items = await get_Items_By_Section_Id_And_Type_Id(sectionId, itemTypeId);
@@ -259,7 +260,7 @@ export const getItemsBySectionIdAndTypeId = async (req: Request, res: Response) 
         return res.status(200).json(items);
       } else {
         // ## Images
-        const images = await get_Images_By_Section_Id(villageId);
+        const images = await get_Images_By_Section_Id(sectionId);
         if (!images) return res.status(404).json({ msg: "Images type not found" });
         return res.status(200).json(images);
       }
