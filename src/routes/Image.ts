@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getImagesBySectionId, uploadImageBySectionId } from "../controller/ImagesController";
-import uploadFile from "src/middleware/upload/uploadFile";
+import uploadFile from "../middleware/upload/uploadFile";
 
 const router = Router();
 
