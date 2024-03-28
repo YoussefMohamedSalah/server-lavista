@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  get_Images_By_Section_Id,
   get_Item_By_Id,
   get_Items_By_Location_Id,
   get_Items_By_Section_Id,
@@ -233,23 +234,36 @@ export const getItemsBySectionId = async (req: Request, res: Response) => {
   }
 };
 
+
+
 export const getItemsBySectionIdAndTypeId = async (req: Request, res: Response) => {
   const { villageId } = req.params!;
   const { sectionId, itemTypeId } = req.body!;
-  console.log({ villageId }, { sectionId }, { itemTypeId })
-  // let isTypeValid = isValidUUID(itemTypeId);
-  // if (!isTypeValid) return res.status(400).json({ msg: "id is not valid" });
+
   try {
     if (sectionId === "0") {
-      const items = await get_Items_By_Type_Id(villageId, itemTypeId);
-      if (!items) return res.status(404).json({ msg: "Item type not found" });
-      return res.status(200).json(items);
+      if (itemTypeId !== "images") {
+        const items = await get_Items_By_Type_Id(villageId, itemTypeId);
+        if (!items) return res.status(404).json({ msg: "Item type not found" });
+        return res.status(200).json(items);
+      } else {
+        // ## Images
+        const images = await get_Images_By_Section_Id(villageId);
+        if (!images) return res.status(404).json({ msg: "Images type not found" });
+        return res.status(200).json(images);
+      }
     } else {
-      const items = await get_Items_By_Section_Id_And_Type_Id(sectionId, itemTypeId);
-      if (!items) return res.status(404).json({ msg: "Items not found" });
-      return res.status(200).json(items);
+      if (itemTypeId !== "images") {
+        const items = await get_Items_By_Section_Id_And_Type_Id(sectionId, itemTypeId);
+        if (!items) return res.status(404).json({ msg: "Items not found" });
+        return res.status(200).json(items);
+      } else {
+        // ## Images
+        const images = await get_Images_By_Section_Id(villageId);
+        if (!images) return res.status(404).json({ msg: "Images type not found" });
+        return res.status(200).json(images);
+      }
     }
-    // return res.status(200).json([]);
   } catch (error) {
     console.error("Error Retrieving Items:", error);
     return res.status(500).json({ msg: "Internal server error" });

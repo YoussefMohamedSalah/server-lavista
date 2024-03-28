@@ -12,6 +12,7 @@ import { SectionRouter } from "./routes/Section";
 import { LavistaRouter } from "./routes/Lavista";
 import { addInitialData } from "./auto/AddInitialData";
 import { ItemRouter } from "./routes/Item";
+import { ImageRouter } from "./routes/Image";
 
 require("dotenv").config();
 
@@ -50,6 +51,7 @@ app.use("/lav/api/location", LocationRouter);
 app.use("/lav/api/village", VillageRouter);
 app.use("/lav/api/section", SectionRouter);
 app.use("/lav/api/item", ItemRouter);
+app.use("/lav/api/image", ImageRouter);
 
 // ************************************************
 app.use(express.static("uploads"));

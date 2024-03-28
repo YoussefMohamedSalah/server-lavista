@@ -64,9 +64,6 @@ export class Item extends BaseEntity {
   @Column({ nullable: true })
   max_pressure: string;
 
-
-
-
   @Column({ nullable: true })
   o_ring: string;
 

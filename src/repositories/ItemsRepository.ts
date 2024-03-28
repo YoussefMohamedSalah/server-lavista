@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import { Item } from "../entities/Item";
-import { ItemType } from "../entities/ItemType";
+import { Section } from "../entities/Section";
 
 export const get_Item_By_Id = async (id: string) => {
   try {
@@ -65,6 +65,7 @@ export const get_Items_By_Section_Id = async (sectionId: string) => {
   }
 };
 
+
 export const get_Items_By_Section_Id_And_Type_Id = async (sectionId: string, itemTypeId: string) => {
   try {
     const itemRepository = getRepository(Item);
@@ -75,6 +76,20 @@ export const get_Items_By_Section_Id_And_Type_Id = async (sectionId: string, ite
       .leftJoinAndSelect("item.item_type", "item_type")
       .getMany();
     return item;
+  } catch (error) {
+    console.error("Error Getting Items:", error);
+    return;
+  }
+};
+
+export const get_Images_By_Section_Id = async (id: string) => {
+  try {
+    const sectionRepository = getRepository(Section);
+    const section = await sectionRepository
+      .createQueryBuilder("section")
+      .where("section.id = :id", { id: id })
+      .getOne();
+    return section?.images;
   } catch (error) {
     console.error("Error Getting Items:", error);
     return;

@@ -3,6 +3,8 @@ import { Village } from "./Village";
 import { Lavista } from "./Lavista";
 import { Location } from "./Location";
 import { Item } from "./Item";
+import { Image } from "./Image";
+
 
 @Entity({ name: "section" })
 export class Section extends BaseEntity {
@@ -31,6 +33,9 @@ export class Section extends BaseEntity {
 
   @OneToMany(() => Item, (item) => item.section, { cascade: true, onDelete: "CASCADE" })
   items: Item[];
+
+  @OneToMany(() => Image, (image) => image.section, { cascade: true, onDelete: "CASCADE" })
+  images: Image[];
   // -----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
 
   @Column({
