@@ -78,6 +78,12 @@ export const deleteVillage = async (req: Request, res: Response) => {
     const village = await get_Village_By_Id(id);
     if (!village) return res.status(404).json({ msg: "Village not found" });
     await village.remove();
+
+    const location = await get_Location_By_Id(village.location.id);
+    if (!location) return res.status(404).json({ msg: "Location not found" });
+
+    location.villages_count = location.villages_count - 1;
+    await location.save();
     return res.status(200).json({ msg: "Village deleted" });
   } catch (error) {
     console.error("Error deleted Village:", error);

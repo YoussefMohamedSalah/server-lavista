@@ -79,6 +79,12 @@ export const deleteSection = async (req: Request, res: Response) => {
     const section = await get_Section_By_Id(id);
     if (!section) return res.status(404).json({ msg: "Section not found" });
     await section.remove();
+
+    const village = await get_Village_By_Id(section.village.id);
+    if (!village) return res.status(404).json({ msg: "Village not found" });
+
+    village.sections_count = village.sections_count - 1;
+    await village.save();
     return res.status(200).json({ msg: "Section deleted" });
   } catch (error) {
     console.error("Error deleted Section:", error);

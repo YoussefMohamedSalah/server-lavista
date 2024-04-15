@@ -14,3 +14,17 @@ export const get_Images_By_Section_Id = async (sectionId: string) => {
         return;
     }
 };
+
+export const get_Image_By_Id = async (id: string) => {
+    try {
+        const imageRepository = getRepository(Image);
+        const image = await imageRepository
+            .createQueryBuilder("image")
+            .where("image.id = :id", { id: id })
+            .getOne();
+        return image;
+    } catch (error) {
+        console.error("Error Getting Image:", error);
+        return;
+    }
+};
